@@ -1,0 +1,12 @@
+# use glob syntax
+syntax: glob
+
+# Ignore patterns
+.classpath
+.project
+.mymetadata
+.settings\
+.metadata\
+classes\
+bin\
+gen\
