@@ -1,0 +1,170 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<!--ADD META TAGS AS NECESSARY. ADD PAGE NAME TO FIRST ITEM IN TITLE TAG. DONT FORGET SITE NAME-->
+	<title>Timesheet Manager</title>
+	<link rel="icon" href="../images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="../images/favicon.ico"
+		type="image/x-icon" />
+	<h:outputStylesheet library="css" name="default.css" />
+</h:head>
+
+<h:body>
+	<div>
+		<div id="wrapper">
+
+			<div id="header-img">
+				<a href="http://www.mq.edu.au"><img src="../images/logo.png"
+					border="0" width="192" height="64"
+					title="Macquarie University, Sydney"
+					alt="Macquarie University, Sydney" /></a>
+			</div>
+
+			<div id="header-links">
+				<a href="http://www.mq.edu.au/">Macquarie Home</a> | <a
+					href="http://www.library.mq.edu.au/">Library Home</a> | <a
+					href="http://voyager.mq.edu.au/">Library Catalogue</a>
+			</div>
+
+
+			<div id="content">
+				<h1>#{mesg['app.title']}</h1>
+				<hr />
+
+				<h:form id="form">
+					<p:panelGrid columns="5" style="margin: 0 auto; width: 100%">
+						<f:facet name="header">
+				Lachesis Search
+			</f:facet>
+						<p:outputLabel id="queryLabel" for="query" value="Search for:" />
+						<p:inputText id="query" value="#{searchBean.query}" />
+						<p:outputLabel id="queryFieldLabel" for="queryField"
+							value="using:" />
+						<p:selectOneMenu id="queryField" for="queryField"
+							value="#{searchBean.queryField}">
+							<f:selectItem itemLabel="System ID" itemValue="sourceId" />
+							<f:selectItem itemLabel="One ID" itemValue="authId" />
+							<f:selectItem itemLabel="Surname" itemValue="lastName" />
+							<f:selectItem itemLabel="Last Name" itemValue="firstName" />
+						</p:selectOneMenu>
+						<p:commandButton action="#{searchBean.search}" value="SEARCH"
+							update="people" />
+					</p:panelGrid>
+
+					<hr />
+					<br />
+
+					<p:dataTable id="people" var="person" value="#{searchBean.people}"
+						rowKey="#{person.partyId}"
+						selection="#{searchBean.selectedPerson}" selectionMode="single">
+
+						<f:facet name="header">
+	            Click "View" button after selecting a row to see details
+	        </f:facet>
+
+						<p:column headerText="PARTY ID">
+	            #{person.partyId}
+	        </p:column>
+
+						<p:column headerText="CURRENT">
+	            #{person.current}
+	        </p:column>
+
+						<p:column headerText="FIRST NAME">
+	            #{person.firstName}
+	        </p:column>
+
+						<p:column headerText="LAST NAME">
+	            #{person.lastName}
+	        </p:column>
+
+						<p:column headerText="BARCODE">
+	            #{person.libraryBarcode}
+	        </p:column>
+
+						<f:facet name="footer">
+							<p:commandButton id="viewButton" value="View"
+								icon="ui-icon-search" update=":form:display"
+								oncomplete="personDialog.show()" />
+						</f:facet>
+
+					</p:dataTable>
+
+					<p:dialog id="dialog" header="Person Detail"
+						widgetVar="personDialog" resizable="false" width="400"
+						showEffect="clip" hideEffect="fold">
+
+						<h:panelGrid id="display" columns="2" cellpadding="4">
+
+							<f:facet name="header">
+								<p:graphicImage
+									value="/partyImage/#{searchBean.selectedPerson.partyId}" />
+							</f:facet>
+
+							<h:outputText value="CURRENT:" />
+							<h:outputText value="#{searchBean.selectedPerson.current}" />
+
+							<h:outputText value="PARTY ID:" />
+							<h:outputText value="#{searchBean.selectedPerson.partyId}" />
+
+							<h:outputText value="TITLE:" />
+							<h:outputText value="#{searchBean.selectedPerson.title}" />
+
+							<h:outputText value="FIRST NAME:" />
+							<h:outputText value="#{searchBean.selectedPerson.firstName}" />
+
+							<h:outputText value="PREFERRED NAME:" />
+							<h:outputText value="#{searchBean.selectedPerson.preferredName}" />
+
+							<h:outputText value="MIDDLE NAME:" />
+							<h:outputText value="#{searchBean.selectedPerson.middleName}" />
+
+							<h:outputText value="LAST NAME:" />
+							<h:outputText value="#{searchBean.selectedPerson.lastName}" />
+
+							<h:outputText value="GENDER:" />
+							<h:outputText value="#{searchBean.selectedPerson.gender}" />
+
+							<h:outputText value="BARCODE:" />
+							<h:outputText value="#{searchBean.selectedPerson.libraryBarcode}" />
+
+							<h:outputText value="PARTY ID:" />
+							<h:outputText value="#{searchBean.selectedPerson.partyId}" />
+
+							<h:outputText value="ADDRESS (LINE 1):" />
+							<h:outputText value="#{searchBean.selectedPerson.addressLine1}" />
+
+							<h:outputText value="ADDRESS (LINE 2):" />
+							<h:outputText value="#{searchBean.selectedPerson.addressLine2}" />
+
+							<h:outputText value="ADDRESS (LINE 3):" />
+							<h:outputText value="#{searchBean.selectedPerson.addressLine3}" />
+
+							<h:outputText value="SUBURB:" />
+							<h:outputText value="#{searchBean.selectedPerson.addressSuburb}" />
+
+							<h:outputText value="STATE:" />
+							<h:outputText value="#{searchBean.selectedPerson.addressState}" />
+
+							<h:outputText value="ZIP:" />
+							<h:outputText value="#{searchBean.selectedPerson.addressZip}" />
+
+							<h:outputText value="COUNTRY:" />
+							<h:outputText value="#{searchBean.selectedPerson.addressCountry}" />
+
+						</h:panelGrid>
+					</p:dialog>
+
+				</h:form>
+			</div>
+
+		</div>
+	</div>
+</h:body>
+</html>
