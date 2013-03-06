@@ -1,6 +1,6 @@
 package org.nishen.timesheet.entity;
 
-import java.sql.Time;
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -17,8 +17,10 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "timesheet_day")
-public class TimesheetDay
+public class TimesheetDay implements Serializable
 {
+	private static final long serialVersionUID = -5518475651241183893L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -32,41 +34,45 @@ public class TimesheetDay
 	@Column(name = "timesheet_day")
 	private Date timesheetDay;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "planned_start")
-	private Time plannedStart;
+	private Date plannedStart;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "planned_finish")
-	private Time plannedFinish;
+	private Date plannedFinish;
 
-	@Temporal(TemporalType.TIME)
 	@Column(name = "planned_lunch")
-	private Time plannedLunch;
+	private long plannedLunch;
 
-	@Temporal(TemporalType.TIME)
 	@Column(name = "planned_leave")
-	private Time plannedLeave;
+	private long plannedLeave;
 
-	// TODO: sort out planned leave type.
-	// private LeaveType planned_leave_type_id;
-
-	@Temporal(TemporalType.TIME)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="planned_leave_type_id")
+	private LeaveType plannedLeaveType;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "actual_start")
-	private Time actualStart;
+	private Date actualStart;
 
-	@Temporal(TemporalType.TIME)
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "actual_finish")
-	private Time actualFinish;
+	private Date actualFinish;
 
-	@Temporal(TemporalType.TIME)
 	@Column(name = "actual_lunch")
-	private Time actualLunch;
+	private long actualLunch;
 
-	@Temporal(TemporalType.TIME)
 	@Column(name = "actual_leave")
-	private Time actualLeave;
+	private long actualLeave;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name="planned_leave_type_id")
+	private LeaveType actualLeaveType;
+	
+	public TimesheetDay()
+	{}
+	
 	public int getId()
 	{
 		return id;
@@ -97,86 +103,103 @@ public class TimesheetDay
 		this.timesheetDay = timesheetDay;
 	}
 
-	public Time getPlannedStart()
+	public Date getPlannedStart()
 	{
 		return plannedStart;
 	}
 
-	public void setPlannedStart(Time plannedStart)
+	public void setPlannedStart(Date plannedStart)
 	{
 		this.plannedStart = plannedStart;
 	}
 
-	public Time getPlannedFinish()
+	public Date getPlannedFinish()
 	{
 		return plannedFinish;
 	}
 
-	public void setPlannedFinish(Time plannedFinish)
+	public void setPlannedFinish(Date plannedFinish)
 	{
 		this.plannedFinish = plannedFinish;
 	}
 
-	public Time getPlannedLunch()
+	public long getPlannedLunch()
 	{
 		return plannedLunch;
 	}
 
-	public void setPlannedLunch(Time plannedLunch)
+	public void setPlannedLunch(long plannedLunch)
 	{
 		this.plannedLunch = plannedLunch;
 	}
 
-	public Time getPlannedLeave()
+	public long getPlannedLeave()
 	{
 		return plannedLeave;
 	}
 
-	public void setPlannedLeave(Time plannedLeave)
+	public void setPlannedLeave(long plannedLeave)
 	{
 		this.plannedLeave = plannedLeave;
 	}
 
-	public Time getActualStart()
+	public Date getActualStart()
 	{
 		return actualStart;
 	}
 
-	public void setActualStart(Time actualStart)
+	public void setActualStart(Date actualStart)
 	{
 		this.actualStart = actualStart;
 	}
 
-	public Time getActualFinish()
+	public Date getActualFinish()
 	{
 		return actualFinish;
 	}
 
-	public void setActualFinish(Time actualFinish)
+	public void setActualFinish(Date actualFinish)
 	{
 		this.actualFinish = actualFinish;
 	}
 
-	public Time getActualLunch()
+	public long getActualLunch()
 	{
 		return actualLunch;
 	}
 
-	public void setActualLunch(Time actualLunch)
+	public void setActualLunch(long actualLunch)
 	{
 		this.actualLunch = actualLunch;
 	}
 
-	public Time getActualLeave()
+	public long getActualLeave()
 	{
 		return actualLeave;
 	}
 
-	public void setActualLeave(Time actualLeave)
+	public void setActualLeave(long actualLeave)
 	{
 		this.actualLeave = actualLeave;
 	}
 
-	// TODO: sort out planned leave type.
-	// private LeaveType actual_leave_type_id;
+	public LeaveType getPlannedLeaveType()
+	{
+		return plannedLeaveType;
+	}
+
+	public void setPlannedLeaveType(LeaveType plannedLeaveType)
+	{
+		this.plannedLeaveType = plannedLeaveType;
+	}
+
+	public LeaveType getActualLeaveType()
+	{
+		return actualLeaveType;
+	}
+
+	public void setActualLeaveType(LeaveType actualLeaveType)
+	{
+		this.actualLeaveType = actualLeaveType;
+	}
 }

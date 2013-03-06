@@ -4,8 +4,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
 	<persistence-unit name="timesheet" transaction-type="RESOURCE_LOCAL">
 		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
-		<class>org.nishen.timesheet.entity.User</class>
+		<class>org.nishen.timesheet.entity.TimesheetUser</class>
 		<class>org.nishen.timesheet.entity.Timesheet</class>
+		<class>org.nishen.timesheet.entity.LeaveType</class>
 		<class>org.nishen.timesheet.entity.TimesheetDay</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

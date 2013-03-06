@@ -44,7 +44,7 @@ public class TimesheetUser implements Serializable
 	@Column(name = "status")
 	private String status;
 
-	@OneToMany (fetch = FetchType.LAZY, mappedBy = "user")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "timesheetUser")
 	@OrderBy("periodCommenceDate DESC")
 	private List<Timesheet> timesheets;
 	
@@ -111,6 +111,16 @@ public class TimesheetUser implements Serializable
 	public void setStatus(String status)
 	{
 		this.status = status;
+	}
+
+	public List<Timesheet> getTimesheets()
+	{
+		return timesheets;
+	}
+
+	public void setTimesheets(List<Timesheet> timesheets)
+	{
+		this.timesheets = timesheets;
 	}
 
 	@Override

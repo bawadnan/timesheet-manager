@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -41,14 +42,17 @@ public class Timesheet implements Serializable
 	@Column(name = "status")
 	private String status;
 
-	@ManyToOne (fetch = FetchType.EAGER)
-	@JoinColumn(name = "timesheet_user_id", nullable = false, insertable = false, updatable = false)
-	private TimesheetUser user;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "timesheet_user_id")
+	private TimesheetUser timesheetUser;
 
-	@OneToMany (fetch = FetchType.EAGER, mappedBy = "timesheet")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "timesheet", cascade = CascadeType.ALL)
 	@OrderBy("timesheetDay")
-	List<TimesheetDay> timesheetDays;
-	
+	private List<TimesheetDay> timesheetDays;
+
+	public Timesheet()
+	{}
+
 	public int getId()
 	{
 		return id;
@@ -89,13 +93,23 @@ public class Timesheet implements Serializable
 		this.status = status;
 	}
 
-	public TimesheetUser getUser()
+	public TimesheetUser getTimesheetUser()
 	{
-		return user;
+		return timesheetUser;
 	}
 
-	public void setUser(TimesheetUser user)
+	public void setTimesheetUser(TimesheetUser timesheetUser)
 	{
-		this.user = user;
+		this.timesheetUser = timesheetUser;
+	}
+
+	public List<TimesheetDay> getTimesheetDays()
+	{
+		return timesheetDays;
+	}
+
+	public void setTimesheetDays(List<TimesheetDay> timesheetDays)
+	{
+		this.timesheetDays = timesheetDays;
 	}
 }
