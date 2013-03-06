@@ -18,11 +18,11 @@ import org.slf4j.LoggerFactory;
 
 @Entity
 @Table(name = "timesheet_user")
-public class User implements Serializable
+public class TimesheetUser implements Serializable
 {
 	private static final long serialVersionUID = 4821049904009561911L;
 
-	private static final Logger log = LoggerFactory.getLogger(User.class);
+	private static final Logger log = LoggerFactory.getLogger(TimesheetUser.class);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,7 +48,7 @@ public class User implements Serializable
 	@OrderBy("periodCommenceDate DESC")
 	private List<Timesheet> timesheets;
 	
-	public User()
+	public TimesheetUser()
 	{
 		log.trace("instantiating class: {}", this.getClass().getName());
 	}
@@ -142,7 +142,7 @@ public class User implements Serializable
 		{
 			return false;
 		}
-		User other = (User) obj;
+		TimesheetUser other = (TimesheetUser) obj;
 		if (department == null)
 		{
 			if (other.department != null)

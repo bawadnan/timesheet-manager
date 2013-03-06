@@ -8,7 +8,7 @@ import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.nishen.timesheet.entity.User;
+import org.nishen.timesheet.entity.TimesheetUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,14 +43,14 @@ public class TestUser
 	@Test
 	public void testUserOperations()
 	{
-		User u = new User();
+		TimesheetUser u = new TimesheetUser();
 		u.setName("Test User");
 		u.setDepartment("Test Department");
 		u.setEmail("test@email.com");
 		u.setOneId("1234567890");
 		u.setStatus("ACTIVE");
 		
-		User u1 = new User();
+		TimesheetUser u1 = new TimesheetUser();
 		u1.setId(u.getId());
 		u1.setOneId(u.getOneId());
 		u1.setName(u.getName());
@@ -69,7 +69,7 @@ public class TestUser
 		Assert.assertTrue("invalid id returned", id > 0);
 		
 		// read
-		User u2 = em.find(User.class, new Long(id));
+		TimesheetUser u2 = em.find(TimesheetUser.class, new Long(id));
 
 		Assert.assertEquals("objects do not match", u, u2);
 
@@ -87,6 +87,6 @@ public class TestUser
 		em.remove(u2);
 		em.getTransaction().commit();
 		
-		Assert.assertNull(em.find(User.class, new Long(id)));
+		Assert.assertNull(em.find(TimesheetUser.class, new Long(id)));
 	}
 }

@@ -43,7 +43,7 @@ public class Timesheet implements Serializable
 
 	@ManyToOne (fetch = FetchType.EAGER)
 	@JoinColumn(name = "timesheet_user_id", nullable = false, insertable = false, updatable = false)
-	private User user;
+	private TimesheetUser user;
 
 	@OneToMany (fetch = FetchType.EAGER, mappedBy = "timesheet")
 	@OrderBy("timesheetDay")
@@ -89,12 +89,12 @@ public class Timesheet implements Serializable
 		this.status = status;
 	}
 
-	public User getUser()
+	public TimesheetUser getUser()
 	{
 		return user;
 	}
 
-	public void setUser(User user)
+	public void setUser(TimesheetUser user)
 	{
 		this.user = user;
 	}
