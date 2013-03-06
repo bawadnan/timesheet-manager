@@ -15,11 +15,11 @@ import org.slf4j.LoggerFactory;
 public class TestUser
 {
 	private static final Logger log = LoggerFactory.getLogger(TestUser.class);
-	
+
 	private static final String PERSISTENCE_UNIT = "timesheet";
-	
+
 	private static EntityManager em = null;
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception
 	{
@@ -36,7 +36,7 @@ public class TestUser
 		query.executeUpdate();
 		em.flush();
 		em.getTransaction().commit();
-		
+
 		em.close();
 	}
 
@@ -49,7 +49,7 @@ public class TestUser
 		u.setEmail("test@email.com");
 		u.setOneId("1234567890");
 		u.setStatus("ACTIVE");
-		
+
 		TimesheetUser u1 = new TimesheetUser();
 		u1.setId(u.getId());
 		u1.setOneId(u.getOneId());
@@ -63,11 +63,11 @@ public class TestUser
 		em.persist(u1);
 		em.flush();
 		em.getTransaction().commit();
-		
+
 		int id = u1.getId();
 		u.setId(id);
 		Assert.assertTrue("invalid id returned", id > 0);
-		
+
 		// read
 		TimesheetUser u2 = em.find(TimesheetUser.class, new Long(id));
 
@@ -81,12 +81,12 @@ public class TestUser
 		em.getTransaction().commit();
 
 		Assert.assertTrue("objects are not different", !u.equals(u2));
-		
+
 		// delete
 		em.getTransaction().begin();
 		em.remove(u2);
 		em.getTransaction().commit();
-		
+
 		Assert.assertNull(em.find(TimesheetUser.class, new Long(id)));
 	}
 }

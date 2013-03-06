@@ -17,15 +17,15 @@ public class TestBean
 		name = "Nishen";
 		age = 37;
 	}
-	
+
 	public String update()
 	{
 		log.debug("age: {}", age);
 		age += 1;
-		
+
 		return Result.SUCCESS;
 	}
-	
+
 	public String getName()
 	{
 		return name;

@@ -47,7 +47,7 @@ public class TimesheetUser implements Serializable
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "timesheetUser")
 	@OrderBy("periodCommenceDate DESC")
 	private List<Timesheet> timesheets;
-	
+
 	public TimesheetUser()
 	{
 		log.trace("instantiating class: {}", this.getClass().getName());

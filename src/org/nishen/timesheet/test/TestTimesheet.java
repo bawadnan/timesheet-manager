@@ -19,28 +19,28 @@ import org.slf4j.LoggerFactory;
 public class TestTimesheet
 {
 	private static final Logger log = LoggerFactory.getLogger(TestUser.class);
-	
+
 	private static final String PERSISTENCE_UNIT = "timesheet";
 
 	private static final int DURATION = 14;
-	
+
 	private static EntityManager em = null;
-	
+
 	private static TimesheetUser tu = null;
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception
 	{
 		em = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT).createEntityManager();
 		log.trace("persistence manager created");
-		
+
 		tu = new TimesheetUser();
 		tu.setName("Test User");
 		tu.setDepartment("Test Department");
 		tu.setEmail("test@email.com");
 		tu.setOneId("1234567890");
 		tu.setStatus("ACTIVE");
-		
+
 		em.getTransaction().begin();
 		em.persist(tu);
 		em.getTransaction().commit();
@@ -64,7 +64,7 @@ public class TestTimesheet
 		t.setDuration(DURATION);
 		t.setStatus("ACTIVE");
 		t.setPeriodCommenceDate(c.getTime());
-		
+
 		List<TimesheetDay> timesheetDays = new ArrayList<TimesheetDay>();
 		for (int x = t.getDuration(); x > 0; x--)
 		{
@@ -81,20 +81,20 @@ public class TestTimesheet
 			ct.set(Calendar.MINUTE, 0);
 			ct.set(Calendar.SECOND, 0);
 			td.setPlannedStart(ct.getTime());
-			
+
 			ct.set(Calendar.HOUR, 17);
 			ct.set(Calendar.MINUTE, 0);
 			ct.set(Calendar.SECOND, 0);
 			td.setPlannedFinish(ct.getTime());
-			
-			td.setPlannedLunch(30*60*1000);
+
+			td.setPlannedLunch(30 * 60 * 1000);
 			td.setPlannedLeave(0);
-			
+
 			timesheetDays.add(td);
 		}
 
 		t.setTimesheetDays(timesheetDays);
-		
+
 		em.getTransaction().begin();
 		em.persist(t);
 		em.getTransaction().commit();

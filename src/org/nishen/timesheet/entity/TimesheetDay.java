@@ -49,9 +49,9 @@ public class TimesheetDay implements Serializable
 	private long plannedLeave;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="planned_leave_type_id")
+	@JoinColumn(name = "planned_leave_type_id")
 	private LeaveType plannedLeaveType;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "actual_start")
 	private Date actualStart;
@@ -67,12 +67,12 @@ public class TimesheetDay implements Serializable
 	private long actualLeave;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="planned_leave_type_id")
+	@JoinColumn(name = "planned_leave_type_id")
 	private LeaveType actualLeaveType;
-	
+
 	public TimesheetDay()
 	{}
-	
+
 	public int getId()
 	{
 		return id;
