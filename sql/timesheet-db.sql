@@ -76,8 +76,8 @@ create table timesheet_log
     timesheet_id                integer            not null,
     timesheet_user_id           integer            not null,
     log                         varchar(500)       not null,
-    constraint foreign key (timesheet_id) references timesheet(id),
-    constraint foreign key (timesheet_user_id) references timesheet_user(id)
+    constraint foreign key (timesheet_id) references timesheet(id) on delete cascade on update cascade,
+    constraint foreign key (timesheet_user_id) references timesheet_user(id) on delete cascade on update cascade
 );
 
 create table timesheet_day
