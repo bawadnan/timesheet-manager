@@ -1,6 +1,7 @@
 package org.nishen.timesheet.test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
@@ -35,10 +36,10 @@ public class TestTimesheet
 		log.trace("persistence manager created");
 
 		tu = new TimesheetUser();
+		tu.setOneId("TU1234567890");
+		tu.setEmail("testDepartment@email.com");
 		tu.setName("Test User");
 		tu.setDepartment("Test Department");
-		tu.setEmail("test@email.com");
-		tu.setOneId("1234567890");
 		tu.setStatus("ACTIVE");
 
 		em.getTransaction().begin();
@@ -49,6 +50,12 @@ public class TestTimesheet
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception
 	{
+		em.getTransaction().begin();
+		List<Timesheet> timesheets = tu.getTimesheets();
+		for (Timesheet timesheet : timesheets)
+			em.remove(timesheet);
+		em.remove(tu);
+		em.getTransaction().commit();
 		em.close();
 	}
 
@@ -60,6 +67,7 @@ public class TestTimesheet
 		c.set(2013, Calendar.MARCH, 14);
 
 		Timesheet t = new Timesheet();
+		tu.setTimesheets(Arrays.asList(t));
 		t.setTimesheetUser(tu);
 		t.setDuration(DURATION);
 		t.setStatus("ACTIVE");
@@ -97,6 +105,7 @@ public class TestTimesheet
 
 		em.getTransaction().begin();
 		em.persist(t);
+		em.flush();
 		em.getTransaction().commit();
 	}
 }

@@ -44,6 +44,8 @@ create table timesheet_user
     name                        varchar(100)       not null,
     department                  varchar(50)        not null,
     status                      varchar(20)        not null,
+    time_accrued                integer,
+    time_forfeited              integer,
     unique(one_id),
     unique(email)
 );
@@ -74,10 +76,8 @@ create table timesheet_log
 (
     id                          integer            primary key     auto_increment,
     timesheet_id                integer            not null,
-    timesheet_user_id           integer            not null,
     log                         varchar(500)       not null,
-    constraint foreign key (timesheet_id) references timesheet(id) on delete cascade on update cascade,
-    constraint foreign key (timesheet_user_id) references timesheet_user(id) on delete cascade on update cascade
+    constraint foreign key (timesheet_id) references timesheet(id) on delete cascade on update cascade
 );
 
 create table timesheet_day
@@ -96,8 +96,8 @@ create table timesheet_day
     actual_leave                integer,
     actual_leave_type_id        integer,
     constraint foreign key (timesheet_id) references timesheet(id) on delete cascade on update cascade,
-    constraint foreign key (planned_leave_type_id) references leave_type(id) on delete set null on update cascade,
-    constraint foreign key (actual_leave_type_id) references leave_type(id) on delete set null on update cascade,
+    constraint foreign key (planned_leave_type_id) references leave_type(id),
+    constraint foreign key (actual_leave_type_id) references leave_type(id),
     unique(timesheet_id, timesheet_day)
 );
 
@@ -111,13 +111,13 @@ create table template
 
 create table template_day
 (
-    id                           integer           primary key    auto_increment,
-    template_id                  integer           not null,
-    planned_start                datetime          not null,
-    planned_finish               datetime          not null,
-    planned_lunch                integer,
-    planned_leave                integer,
-    planned_leave_type_id        integer,
+    id                          integer            primary key    auto_increment,
+    template_id                 integer            not null,
+    planned_start               datetime           not null,
+    planned_finish              datetime           not null,
+    planned_lunch               integer,
+    planned_leave               integer,
+    planned_leave_type_id       integer,
     constraint foreign key (template_id) references template(id) on delete cascade on update cascade,
     constraint foreign key (planned_leave_type_id) references leave_type(id) on delete set null on update cascade
 );
