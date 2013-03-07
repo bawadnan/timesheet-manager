@@ -23,7 +23,7 @@
 
 	<logger name="org.nishen" level="TRACE" additivity="false">
 		<appender-ref ref="STDOUT" />
-		<appender-ref ref="FILE" />
+		<!-- <appender-ref ref="FILE" /> -->
 	</logger>
 
 	<!-- Strictly speaking, the level attribute is not necessary since -->
