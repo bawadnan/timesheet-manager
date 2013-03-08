@@ -8,6 +8,7 @@
 		<class>org.nishen.timesheet.entity.Timesheet</class>
 		<class>org.nishen.timesheet.entity.LeaveType</class>
 		<class>org.nishen.timesheet.entity.TimesheetDay</class>
+		<exclude-unlisted-classes />
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/timesheet" />

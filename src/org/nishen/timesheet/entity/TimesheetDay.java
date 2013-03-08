@@ -15,11 +15,16 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Entity
 @Table(name = "timesheet_day")
 public class TimesheetDay implements Serializable
 {
 	private static final long serialVersionUID = -5518475651241183893L;
+
+	private static final Logger log = LoggerFactory.getLogger(TimesheetDay.class);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -71,7 +76,9 @@ public class TimesheetDay implements Serializable
 	private LeaveType actualLeaveType;
 
 	public TimesheetDay()
-	{}
+	{
+		log.trace("instantiating class: {}", this.getClass().getName());
+	}
 
 	public int getId()
 	{

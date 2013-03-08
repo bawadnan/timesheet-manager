@@ -9,11 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Entity
 @Table(name = "leave_type")
 public class LeaveType implements Serializable
 {
 	private static final long serialVersionUID = -3529408213552788136L;
+	
+	private static final Logger log = LoggerFactory.getLogger(LeaveType.class);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +35,9 @@ public class LeaveType implements Serializable
 	private int defaultHours;
 
 	public LeaveType()
-	{}
+	{
+		log.trace("instantiating class: {}", this.getClass().getName());
+	}
 
 	public int getId()
 	{
