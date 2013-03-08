@@ -10,6 +10,13 @@ public class TimesheetBean
 
 	private TimesheetDAO timesheetDAO;
 
+	public TimesheetBean()
+	{
+		log.trace("instantiating class: {}", this.getClass().getName());
+	}
+	
+	
+	
 	public void setTimesheetDAO(TimesheetDAO timesheetDAO)
 	{
 		this.timesheetDAO = timesheetDAO;
