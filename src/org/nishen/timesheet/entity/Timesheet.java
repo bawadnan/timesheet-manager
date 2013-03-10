@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.nishen.timesheet.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +28,7 @@ import org.slf4j.LoggerFactory;
 public class Timesheet implements Serializable
 {
 	private static final long serialVersionUID = -3741953535615062629L;
-	
+
 	private static final Logger log = LoggerFactory.getLogger(Timesheet.class);
 
 	@Id
@@ -78,6 +79,11 @@ public class Timesheet implements Serializable
 	public void setPeriodCommenceDate(Date periodCommenceDate)
 	{
 		this.periodCommenceDate = periodCommenceDate;
+	}
+
+	public Date getPeriodEndDate()
+	{
+		return DateUtil.addDays(periodCommenceDate, duration);
 	}
 
 	public int getDuration()

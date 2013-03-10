@@ -1,8 +1,18 @@
 package org.nishen.timesheet.dao;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
 
+import org.nishen.timesheet.entity.Timesheet;
+import org.nishen.timesheet.entity.TimesheetDay;
+import org.nishen.timesheet.entity.TimesheetUser;
+import org.nishen.timesheet.util.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +26,63 @@ public class TimesheetDAOImpl implements TimesheetDAO
 	{
 		log.trace("instantiating class: {}", this.getClass().getName());
 	}
-	
+
+	public Timesheet getTimesheet(TimesheetUser user, Date day)
+	{
+		Timesheet t = null;
+
+		String sql = "";
+		sql += "select t from Timesheet t ";
+		sql += " where t.timesheetUser = :user ";
+		sql += "   and t.periodCommenceDate = :day";
+		EntityManager em = timesheetEMF.createEntityManager();
+		try
+		{
+			Query query = em.createQuery(sql);
+			query.setParameter("user", user);
+			query.setParameter("day", day);
+			t = (Timesheet) query.getSingleResult();
+		}
+		catch (NoResultException nre)
+		{
+			log.debug("timesheet not found [{}]: {}", user.getId(), day);
+		}
+		finally
+		{
+			if (em != null)
+				em.close();
+		}
+
+		if (t == null)
+		{
+			log.debug("generating timesheet");
+			t = makeTimesheet(user, day);
+		}
+
+		return t;
+	}
+
+	private Timesheet makeTimesheet(TimesheetUser user, Date day)
+	{
+		Timesheet t = new Timesheet();
+		t.setTimesheetUser(user);
+		t.setPeriodCommenceDate(day);
+		t.setDuration(14);
+		t.setStatus("ACTIVE");
+
+		List<TimesheetDay> td = new ArrayList<TimesheetDay>();
+		Date dayvar = day;
+		for (int x = 0; x < t.getDuration(); x++)
+		{
+			TimesheetDay tday = new TimesheetDay();
+			tday.setTimesheetDay(dayvar);
+			dayvar = DateUtil.addDays(dayvar, 1);
+		}
+		t.setTimesheetDays(td);
+		
+		return t;
+	}
+
 	public void persist(Object t) throws Exception
 	{
 		EntityManager em = timesheetEMF.createEntityManager();

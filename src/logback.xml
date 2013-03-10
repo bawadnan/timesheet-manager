@@ -11,21 +11,8 @@
 		</encoder>
 	</appender>
 
-    <!--
-	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-			<level>DEBUG</level>
-		</filter>
-		<file>timesheet-${bySecond}.log</file>
-		<encoder>
-			<pattern>%d{HH:mm:ss.SSS} [%-5level]:-- %msg%n</pattern>
-		</encoder>
-	</appender>
-    -->
-  
 	<logger name="org.nishen" level="TRACE" additivity="false">
 		<appender-ref ref="STDOUT" />
-		<!-- <appender-ref ref="FILE" /> -->
 	</logger>
 
 	<!-- Strictly speaking, the level attribute is not necessary since -->
