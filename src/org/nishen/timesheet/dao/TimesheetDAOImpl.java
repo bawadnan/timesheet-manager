@@ -1,6 +1,7 @@
 package org.nishen.timesheet.dao;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -71,12 +72,25 @@ public class TimesheetDAOImpl implements TimesheetDAO
 		t.setStatus("ACTIVE");
 
 		List<TimesheetDay> td = new ArrayList<TimesheetDay>();
+		Calendar zero = Calendar.getInstance();
+		zero.setTimeInMillis(0);
 		Date dayvar = day;
 		for (int x = 0; x < t.getDuration(); x++)
 		{
 			TimesheetDay tday = new TimesheetDay();
 			tday.setTimesheetDay(dayvar);
 			dayvar = DateUtil.addDays(dayvar, 1);
+			tday.setPlannedStart(zero.getTime());
+			tday.setPlannedFinish(zero.getTime());
+			tday.setPlannedLunch(0);
+			tday.setPlannedLeave(0);
+
+			tday.setActualStart(zero.getTime());
+			tday.setActualFinish(zero.getTime());
+			tday.setActualLunch(0);
+			tday.setActualLeave(0);
+
+			td.add(tday);
 		}
 		t.setTimesheetDays(td);
 		
