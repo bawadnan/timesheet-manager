@@ -2,8 +2,10 @@ package org.nishen.timesheet.bean;
 
 import org.nishen.timesheet.dao.TimesheetDAO;
 import org.nishen.timesheet.entity.Timesheet;
+import org.nishen.timesheet.entity.TimesheetDay;
 import org.nishen.timesheet.entity.TimesheetUser;
 import org.nishen.timesheet.util.DateUtil;
+import org.primefaces.event.RowEditEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +43,18 @@ public class TimesheetBean
 		log.debug("performed action: {}", "updateTimesheet");
 
 		return Result.SUCCESS;
+	}
+
+	public void onEdit(RowEditEvent event)
+	{
+		TimesheetDay td = (TimesheetDay) event.getObject();
+		log.debug("edit event: {}", td.getPlannedStart());
+	}
+	
+	public void onCancel(RowEditEvent event)
+	{
+		TimesheetDay td = (TimesheetDay) event.getObject();
+		log.debug("edit event: {}", td.getPlannedStart());
 	}
 
 	public Timesheet getTimesheet()
