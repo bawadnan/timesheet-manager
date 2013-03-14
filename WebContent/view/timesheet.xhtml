@@ -18,6 +18,8 @@
       <h1>Timesheet</h1>
 
       <h:form id="form">
+        <p:growl id="messages" showDetail="true"/>
+        
         <p:dataTable style="margin: 0 auto; width: 100%" var="day" value="#{timesheetBean.timesheet.timesheetDays}"
           editable="true">
 
@@ -40,6 +42,9 @@
             </p:row>
           </f:facet>
 
+          <p:ajax event="rowEdit" listener="#{timesheetBean.onEdit}" update=":form:messages" />
+          <p:ajax event="rowEditCancel" listener="#{timesheetBean.onCancel}" update=":form:messages" />
+          
           <p:column headerText="DATE">
             <h:outputText value="#{day.timesheetDay}" style="text-transform: uppercase;">
               <f:convertDateTime pattern="dd/MM/yyyy [EEE]" />
@@ -50,12 +55,12 @@
             <p:cellEditor>
               <f:facet name="output">
                 <h:outputText value="#{day.plannedStart}">
-                  <f:convertDateTime pattern="hh:mm" />
+                  <f:convertDateTime pattern="HH:mm" />
                 </h:outputText>
               </f:facet>
               <f:facet name="input">
                 <p:inputText value="#{day.plannedStart}">
-                  <f:convertDateTime pattern="hh:mm" />
+                  <f:convertDateTime pattern="HH:mm" />
                 </p:inputText>
               </f:facet>
             </p:cellEditor>
@@ -106,6 +111,9 @@
             <h:outputText value="#{day.actualLeaveType}">
               <f:convertDateTime pattern="dd/MM/yyyy" />
             </h:outputText>
+          </p:column>
+          <p:column>
+            <p:rowEditor />
           </p:column>
 
         </p:dataTable>

@@ -49,12 +49,14 @@ public class TimesheetBean
 	{
 		TimesheetDay td = (TimesheetDay) event.getObject();
 		log.debug("edit event: {}", td.getPlannedStart());
+		log.debug("edit event: {}", td.getPlannedStart().getTime());
 	}
 	
 	public void onCancel(RowEditEvent event)
 	{
 		TimesheetDay td = (TimesheetDay) event.getObject();
 		log.debug("edit event: {}", td.getPlannedStart());
+		log.debug("edit event: {}", td.getPlannedStart().getTime());
 	}
 
 	public Timesheet getTimesheet()
