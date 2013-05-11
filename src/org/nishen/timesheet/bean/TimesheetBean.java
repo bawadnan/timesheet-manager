@@ -55,8 +55,8 @@ public class TimesheetBean
 	public void onCancel(RowEditEvent event)
 	{
 		TimesheetDay td = (TimesheetDay) event.getObject();
-		log.debug("edit event: {}", td.getPlannedStart());
-		log.debug("edit event: {}", td.getPlannedStart().getTime());
+		log.debug("cancel event: {}", td.getPlannedStart());
+		log.debug("cancel event: {}", td.getPlannedStart().getTime());
 	}
 
 	public Timesheet getTimesheet()
