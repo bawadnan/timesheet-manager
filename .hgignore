@@ -5,9 +5,9 @@ syntax: glob
 .classpath
 .project
 .mymetadata
-.settings\
-.metadata\
-.externalToolBuilders\
-classes\
-bin\
-gen\
+.settings
+.metadata
+.externalToolBuilders
+classes
+bin
+gen
