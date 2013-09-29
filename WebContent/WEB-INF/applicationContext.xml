@@ -7,23 +7,22 @@
 
 	<context:component-scan base-package="org.nishen.timesheet" />
 
-	<bean id="timesheetBean" class="org.nishen.timesheet.bean.TimesheetBean"
-		scope="session">
+	<!--
+	<bean id="timesheetBean" class="org.nishen.timesheet.bean.TimesheetBean" scope="session">
 		<aop:scoped-proxy />
 		<constructor-arg ref="timesheetDAO" />
 	</bean>
+	-->
 
 	<bean id="timesheetDAO" class="org.nishen.timesheet.dao.TimesheetDAOImpl">
 		<property name="timesheetEMF" ref="timesheetEMF" />
 	</bean>
 
-	<bean id="timesheetEMF"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+	<bean id="timesheetEMF" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="timesheetDataSource" />
 	</bean>
 
-	<bean id="timesheetDataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	<bean id="timesheetDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/timesheet" />
 		<property name="username" value="timesheet" />
