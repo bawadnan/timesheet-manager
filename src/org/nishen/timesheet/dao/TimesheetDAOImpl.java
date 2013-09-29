@@ -36,6 +36,7 @@ public class TimesheetDAOImpl implements TimesheetDAO
 		sql += "select t from Timesheet t ";
 		sql += " where t.timesheetUser = :user ";
 		sql += "   and t.periodCommenceDate = :day";
+
 		EntityManager em = timesheetEMF.createEntityManager();
 		try
 		{
@@ -93,7 +94,7 @@ public class TimesheetDAOImpl implements TimesheetDAO
 			td.add(tday);
 		}
 		t.setTimesheetDays(td);
-		
+
 		return t;
 	}
 

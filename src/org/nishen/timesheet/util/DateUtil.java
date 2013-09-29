@@ -15,13 +15,13 @@ public class DateUtil
 
 		return c.getTime();
 	}
-	
+
 	public static Date addDays(Date date, int duration)
 	{
 		Calendar c = Calendar.getInstance();
 		c.setTime(date);
 		c.add(Calendar.DAY_OF_MONTH, duration);
-		
+
 		return c.getTime();
 	}
 }

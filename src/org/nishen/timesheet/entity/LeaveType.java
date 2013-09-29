@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 public class LeaveType implements Serializable
 {
 	private static final long serialVersionUID = -3529408213552788136L;
-	
+
 	private static final Logger log = LoggerFactory.getLogger(LeaveType.class);
 
 	@Id
