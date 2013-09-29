@@ -25,7 +25,35 @@ public class TimesheetDAOImpl implements TimesheetDAO
 
 	public TimesheetDAOImpl()
 	{
-		log.trace("instantiating class: {}", this.getClass().getName());
+		log.debug("instantiating class: {}", this.getClass().getName());
+	}
+
+	public TimesheetUser getUser(String oneId)
+	{
+		TimesheetUser u = null;
+
+		String sql = "";
+		sql += "select u from TimesheetUser tu ";
+		sql += " where t.oneId = :oneId ";
+
+		EntityManager em = timesheetEMF.createEntityManager();
+		try
+		{
+			Query query = em.createQuery(sql);
+			query.setParameter("oneId", oneId);
+			u = (TimesheetUser) query.getSingleResult();
+		}
+		catch (NoResultException nre)
+		{
+			log.debug("user not found: {}", oneId);
+		}
+		finally
+		{
+			if (em != null)
+				em.close();
+		}
+
+		return u;
 	}
 
 	public Timesheet getTimesheet(TimesheetUser user, Date day)

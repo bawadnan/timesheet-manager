@@ -12,10 +12,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@XmlRootElement(name = "user")
+@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @Table(name = "timesheet_user")
 public class TimesheetUser implements Serializable
@@ -24,23 +31,29 @@ public class TimesheetUser implements Serializable
 
 	private static final Logger log = LoggerFactory.getLogger(TimesheetUser.class);
 
+	@XmlAttribute
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
 
+	@XmlElement
 	@Column(name = "one_id")
 	private String oneId;
 
+	@XmlElement
 	@Column(name = "email")
 	private String email;
 
+	@XmlElement
 	@Column(name = "name")
 	private String name;
 
+	@XmlElement
 	@Column(name = "department")
 	private String department;
 
+	@XmlElement
 	@Column(name = "status")
 	private String status;
 

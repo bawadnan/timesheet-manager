@@ -13,6 +13,7 @@ public class TimesheetApplication extends Application
 		Set<Class<?>> s = new HashSet<Class<?>>();
 
 		s.add(TimesheetResource.class);
+		s.add(UserResource.class);
 
 		return s;
 	}
