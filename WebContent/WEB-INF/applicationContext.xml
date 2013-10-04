@@ -13,9 +13,12 @@
 		<aop:scoped-proxy />
 		<constructor-arg ref="timesheetDAO" />
 	</bean>
-
-	<bean class="org.nishen.timesheet.rest.UserResource" />
 	-->
+
+	<bean id="userResource" class="org.nishen.timesheet.rest.UserResource" scope="request">
+		<aop:scoped-proxy />
+		<property name="timesheetDAO" ref="timesheetDAO" />
+	</bean>
 
 	<bean id="timesheetDAO" class="org.nishen.timesheet.dao.TimesheetDAOImpl">
 		<property name="timesheetEMF" ref="timesheetEMF" />

@@ -33,8 +33,8 @@ public class TimesheetDAOImpl implements TimesheetDAO
 		TimesheetUser u = null;
 
 		String sql = "";
-		sql += "select u from TimesheetUser tu ";
-		sql += " where t.oneId = :oneId ";
+		sql += "select tu from TimesheetUser tu ";
+		sql += " where tu.oneId = :oneId ";
 
 		EntityManager em = timesheetEMF.createEntityManager();
 		try
