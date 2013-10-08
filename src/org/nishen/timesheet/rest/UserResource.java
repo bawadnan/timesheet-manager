@@ -26,7 +26,7 @@ public class UserResource
 	}
 
 	@GET
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 	public TimesheetUser getUser(@PathParam("oneId") String oneId)
 	{
 		TimesheetUser u = null;

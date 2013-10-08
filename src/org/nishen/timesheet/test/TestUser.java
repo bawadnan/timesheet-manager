@@ -30,7 +30,6 @@ public class TestUser
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception
 	{
-		/*
 		String sql = "delete from TimesheetUser u where lower(u.name) like :name";
 		em.getTransaction().begin();
 		Query query = em.createQuery(sql).setParameter("name", "test%");
@@ -39,7 +38,6 @@ public class TestUser
 		em.getTransaction().commit();
 
 		em.close();
-		*/
 	}
 
 	@Test
