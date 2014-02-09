@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
@@ -129,33 +130,30 @@ public class TimesheetDAOImpl implements TimesheetDAO
 	public void persist(Object t) throws Exception
 	{
 		EntityManager em = timesheetEMF.createEntityManager();
-		try
-		{
-			em.getTransaction().begin();
-			em.persist(t);
-			em.getTransaction().commit();
-		}
-		finally
-		{
-			if (em != null)
-				em.close();
-		}
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		em.persist(t);
+		et.commit();
+	}
+
+	public void update(Object t) throws Exception
+	{
+		EntityManager em = timesheetEMF.createEntityManager();
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		t = em.merge(t);
+		em.persist(t);
+		et.commit();
 	}
 
 	public void remove(Object t) throws Exception
 	{
 		EntityManager em = timesheetEMF.createEntityManager();
-		try
-		{
-			em.getTransaction().begin();
-			em.remove(t);
-			em.getTransaction().commit();
-		}
-		finally
-		{
-			if (em != null)
-				em.close();
-		}
+		EntityTransaction et = em.getTransaction();
+		et.begin();
+		t = em.merge(t);
+		em.remove(t);
+		et.commit();
 	}
 
 	public void setTimesheetEMF(EntityManagerFactory timesheetEMF)

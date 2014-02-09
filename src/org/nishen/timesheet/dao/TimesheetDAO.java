@@ -13,5 +13,7 @@ public interface TimesheetDAO
 	
 	public void persist(Object t) throws Exception;
 
+	public void update(Object t) throws Exception;
+
 	public void remove(Object t) throws Exception;
 }
