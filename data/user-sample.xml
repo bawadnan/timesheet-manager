@@ -1,0 +1,17 @@
+<users>
+<user id="1">
+	<oneId>mq97000313</oneId>
+	<email>nishen.naidoo@mq.edu.au</email>
+	<name>Nishen Naidoo</name>
+	<department>Library I. T., Library</department>
+	<status>Active</status>
+</user>
+
+<user id="0">
+	<oneId>mq12345678</oneId>
+	<email>john.smith@mq.edu.au</email>
+	<name>John Smith</name>
+	<department>Resources, Library</department>
+	<status>Active</status>
+</user>
+</users>
