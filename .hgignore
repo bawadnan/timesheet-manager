@@ -7,7 +7,7 @@ syntax: glob
 .mymetadata
 .settings
 .metadata
-.externalToolBuilders\
-classes\
-bin\
-gen\
+.externalToolBuilders
+classes
+bin
+gen
