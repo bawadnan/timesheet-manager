@@ -1,5 +1,7 @@
 package org.nishen.timesheet.rest;
 
+import java.net.URI;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -9,6 +11,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.nishen.timesheet.dao.TimesheetDAO;
 import org.nishen.timesheet.entity.TimesheetUser;
@@ -50,22 +53,26 @@ public class UserResource
 	
 	@POST
 	@Consumes(MediaType.APPLICATION_XML)
-	public void createUser(TimesheetUser user)
+	public Response createUser(TimesheetUser user)
 	{
 		log.debug("action:{}", "addUser");
 		log.debug("id:    {}", user.getId());
 		log.debug("oneId: {}", user.getOneId());
 		log.debug("email: {}", user.getEmail());
 		
+		URI responseURI = null;
 		try
 		{
 			user.setId(0);
 			timesheetDAO.persist(user);
+			responseURI = new URI("/user/" + user.getOneId());
+			return Response.created(responseURI).build();
 		}
 		catch (Exception e)
 		{
 			log.error("unable to create user");
 			log.debug("unable to create user:", e);
+			return Response.serverError().build();
 		}
 	}
 
