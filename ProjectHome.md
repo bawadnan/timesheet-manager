@@ -1,0 +1,1 @@
+Web based software application to assist organisations in managing time sheets. This is an attempt to eliminate the paper based systems.
